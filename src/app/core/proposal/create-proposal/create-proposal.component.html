@@ -1,0 +1,69 @@
+<div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="20px">
+  <div fxLayout="row" style="background-color: white; border-radius: 4px;" fxLayoutAlign="space-between center">
+   <div>
+   <p style="font-size: 14px; font-weight: 500" class="mb-0">Create Proposal</p>
+   </div>
+    <div fxLayout="row" fxLayoutGap="20px">
+      <button mat-raised-button style="border: 1px solid var(--primary); color: var(--primary); box-shadow: none;">Cancel</button>
+      <button mat-raised-button style="background-color: var(--primary); color: white; width: 160px; box-shadow: none;">Create Proposal</button>
+    </div>
+  </div>
+  <div fxLayout="row" fxLayoutGap="20px"fxLayoutAlign="space-between start" style="width: 80%;">
+    <div fxFlex="0 0 calc(50% - 15px)">
+      <app-idea-tree></app-idea-tree>
+    </div>
+    <div fxFlex="0 0 calc(50% - 15px)">
+      <mat-card class="sponsor-card" style="box-shadow: none;">
+        <div fxLayout="column" fxLayoutGap="10px">
+       <h2>Basic details</h2>
+       <div>
+        <mat-form-field appearance="outline" style="width: 100%">
+          <mat-label>Name of the Proposal</mat-label>
+          <input matInput type="text">
+        </mat-form-field>
+       </div>
+       <div>
+        <textarea rows="8" cols="65" placeholder="Proposal summary" class="text-area"></textarea>
+       </div>
+       <div>
+        <h2 class="mt-8">Proposal cover image</h2>
+       <div fxLayout="column">
+        <div fxLayout="row"  style="border: 1px solid lightgray; padding: 10px;" fxLayoutAlign="space-between center">
+          <div fxFlexAlign="center center" >
+            <button mat-raised-button style="background-color: #dc4361; color: white; width: 100%;">
+              <mat-icon>add</mat-icon> Choose
+            </button>
+          </div>
+          <div>
+           <div fxLayout="row" fxLayoutAlign="end" fxLayoutGap="10px" class="w-100">
+            <button mat-raised-button style="background-color: var(--primary); color: white;">Upload</button>
+             <button mat-raised-button style="border: 1px solid var(--primary); color: var(--primary);">Cancel</button>
+           </div>
+          </div>
+         </div>
+         <div style="border-bottom: 1px solid lightgray; border-left: 1px solid lightgray; border-right: 1px solid lightgray; padding: 10px; height: 60px;">
+
+         </div>
+       </div>
+       </div>
+       <div>
+        <h2>Proposal Category</h2>
+       </div>
+       <mat-chip-list selectable multiple>
+        <mat-chip #c="matChip" *ngFor="let option of categories_list" [value]="option" (click)="toggleSelection(c, option)" style="cursor: pointer; border-radius: 5px;">
+            {{option}}
+        </mat-chip>
+    </mat-chip-list>
+    <div>
+      <h2>Team details</h2>
+     </div>
+     <mat-form-field appearance="outline" style="width: 100%">
+      <mat-label>Team name</mat-label>
+      <input matInput type="text">
+    </mat-form-field>
+        </div>
+      </mat-card>
+    </div>
+ </div>
+</div>
+

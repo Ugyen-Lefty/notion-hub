@@ -1,0 +1,142 @@
+<div fxLayout="column" fxLayoutGap="20px">
+  <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="15"
+    style="background-color: white; margin-left: 15%; margin-right: 15%; margin-top: 25px; padding: 20px; border-radius: 4px; display: flex;">
+    <div fxFlex="5">
+      <img style="border-radius: 50%"
+        [src]="'https://notion-hub.fly.dev/' + currentUser?.profile_url"
+        width="37px" height="37px" alt="Avatar" />
+    </div>
+    <div fxFlex="75">
+      <input [formControl]="question" class="w-100"
+        style="border-radius: 5px; border: none; background-color: #f0f0f0; height: 40px; padding: 10px;"
+        placeholder="What do you want to ask?">
+    </div>
+    <div fxFlex="20">
+      <button mat-raised-button style="background-color: #dc4361; color: white; width: 100%; font-size: 14px"
+        (click)="askQuestion()">Ask Question</button>
+    </div>
+  </div>
+  <ng-container *ngFor="let forum of forums">
+    <ng-container *ngIf="forum.content_type === 'forum'">
+      <div fxLayout="column" style="background-color: white; border-radius: 4px;" fxLayoutGap="0px">
+        <div fxLayout="row" fxLayoutGap="10px" style="padding: 15px 15px 0 15px" fxLayoutAlign="space-between center">
+          <div fxLayout="row" fxLayoutGap="10px">
+            <img [src]="'https://notion-hub.fly.dev/' + forum?.creator?.profile_url" height="32px"
+              width="32px" style="border-radius: 50%">
+            <div fxLayout="column" fxLayoutAlign="center start">
+              <div style="font-weight: 500; font-size: 14px; ">{{forum.creator.profile.first_name}} {{forum.creator.profile.last_name}}</div>
+              <p style="color: rgba(0,0,0,0.6); font-size: 12px;">{{forum.creator.profile.role}} | posted today</p>
+            </div>
+          </div>
+            <div>
+              <mat-icon [matMenuTriggerFor]="menu" class="cursor-pointer">more_vert</mat-icon>
+              <mat-menu #menu="matMenu" style="font-size: 14px;">
+                <button mat-menu-item>
+                  <mat-icon class="material-icons-outlined text-20" >edit</mat-icon>
+                  <span>Edit</span>
+                </button>
+                <!-- <button mat-menu-item (click)="deleteJob(job)"> -->
+                <button mat-menu-item>
+                  <mat-icon class="material-icons-outlined text-20">report</mat-icon>
+                  <span>Report</span>
+                </button>
+              </mat-menu>
+            </div>
+        </div>
+        <div style="padding: 0 15px 0 15px" *ngIf="!!forum.attachment_urls.length">
+          <img [src]="'https://notion-hub.fly.dev' + forum.attachment_urls[0]"
+            style="border-radius: 5px; object-fit: cover; max-height: 378px;" height="auto" width="100%">
+        </div>
+        <div fxLayout="column">
+          <div fxLayout="row" style="padding: 15px 15px 0 15px; cursor: pointer;" fxLayoutGap="20px">
+            <div fxLayout="column" fxLayoutAlign="center start" fxLayoutGap="3px">
+              <div>
+                <mat-icon  [ngClass]="isLikeColor(forum.dislikes_count, forum.likes_count) ? 'like': ''" (click)="likePost(forum.id)">arrow_upward</mat-icon>
+              </div>
+              <div>
+                <p style="font-size: 16px" [ngClass]="isLikeColor(forum.dislikes_count, forum.likes_count) ? 'like': 'dislike'">{{forum.likes_count - forum.dislikes_count}}</p>
+              </div>
+              <div>
+                <mat-icon [ngClass]="!isLikeColor(forum.dislikes_count, forum.likes_count)? 'dislike': ''" (click)="disLikePost(forum.id)">arrow_downward</mat-icon>
+              </div>
+            </div>
+            <div fxLayout="column" fxLayoutGap="10px">
+              <div>
+                <div style="font-size: 16px; font-weight: 400">{{forum.title}}</div>
+              </div>
+              <div fxLayout="row">
+              <div *ngFor="let cat of forum.categories">
+                <span class="chip-tag inline-block emerald-bg mr-8" style="color: rgba(0,0,0,0.32);">
+                  {{cat}}
+                </span>
+              </div>
+              </div>
+              <div>
+                <p style="color: rgba(0,0,0,0.8);">{{forum.description}}</p>
+              </div>
+            </div>
+          </div>
+          <div fxLayoutAlign="center">
+            <hr width="81%">
+          </div>
+          <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="start center" class="ml-50" style="cursor: pointer">
+            <div fxLayout="row" fxLayoutAlign="center start" (click)="openComment(forum.id)">
+              <img src="assets/images/comment.svg">
+              <p>{{forum.comments_count || 0}}</p>
+            </div>
+            <!-- <div fxLayout="row" fxLayoutAlign="center start">
+              <img src="assets/images/comment.svg">
+              <p>23</p>
+            </div> -->
+            <div>
+            </div>
+          </div>
+          <div fxLayout="column" *ngIf="forum.id === selectedId" fxLayoutGap="1px" style="padding: 0 25px 25px 25px;">
+            <div fxLayout="row" fxLayoutGap="10px" style="padding: 15px 15px 0 15px" fxLayoutAlign="center center">
+              <img style="border-radius: 50%" [src]="'https://notion-hub.fly.dev'+ currentUser?.profile_url"
+              width="37px" height="37px" alt="Avatar" />
+              <mat-form-field style="width: 100%" appearance="outline">
+                <mat-label>Comment</mat-label>
+                <input  #comment [(ngModel)]="input" matInput type="text" class="title" (keyup.enter)="addComments(comment.value, forum.id )">
+              </mat-form-field>
+            </div>
+            <ng-container *ngFor="let comment of comments">
+              <div fxLayout="row" fxLayoutGap="10px" style="padding: 20px 20px 0 20px" fxLayoutAlign="space-between center">
+                <div fxLayout="row" fxLayoutGap="10px">
+                  <img [src]="'https://notion-hub.fly.dev/' + comment?.commenter?.profile_url" height="34px"
+                    width="34px" style="border-radius: 50%">
+                  <div fxLayout="column" fxLayoutAlign="center start">
+                    <div style="font-weight: 500; font-size: 14px; ">{{comment.commenter.profile.first_name}} {{comment.commenter.profile.last_name}}</div>
+                    <p style="color: rgba(0,0,0,0.6); font-size: 12px;">{{comment.commenter.profile.role}} | posted today</p>
+                  </div>
+                </div>
+                <div>
+                  <mat-icon>more_vert</mat-icon>
+                </div>
+              </div>
+              <div fxLayout="row" style="padding: 1px 20px 0 20px" fxLayoutGap="20px">
+                <div fxLayout="column" fxLayoutAlign="center start" fxLayoutGap="3px">
+                  <div>
+                    <mat-icon [ngClass]="isLikeColor(comment.comment_dislikes_count, comment.comment_likes_count) ? 'like': ''">arrow_upward</mat-icon>
+                  </div>
+                  <div>
+                    <p style="font-size: 16px" [ngClass]="isLikeColor(comment.comment_dislikes_count, comment.comment_likes_count) ? 'like': 'dislike'">{{comment.comment_likes_count + comment.comment_dislikes_count}}</p>
+                  </div>
+                  <div>
+                    <mat-icon [ngClass]="!isLikeColor(comment.comment_dislikes_count, comment.comment_likes_count)? 'dislike': ''">arrow_downward</mat-icon>
+                  </div>
+                </div>
+                  <div fxLayout="column" fxLayoutAlign="space-around" >
+                    <p style="color: rgba(0,0,0,0.8);">{{comment.thoughts}}</p>
+                    <div>
+                      <p style="color: var(--primary); cursor: pointer;">Reply</p>
+                    </div>
+                  </div>
+              </div>
+            </ng-container>
+           </div>
+        </div>
+      </div>
+    </ng-container>
+  </ng-container>
+</div>

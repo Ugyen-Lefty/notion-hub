@@ -1,0 +1,15 @@
+<mat-card style="box-shadow: none">
+  <p style="font-size: 16px; font-weight: 400">Popular Discussions</p>
+  <div class="banner-card border-radius-8" *ngFor="let cat of discussion">
+    <div fxLayout="row" fxLayoutAlign="start center" class="banner-card-list">
+      <div fxFlex="40" class="banner-card-img p-20">
+        <img [src]="'https://notion-hub.fly.dev'+cat?.attachment_urls[0]" width="58px"
+            height="58px%">
+      </div>
+      <div fxFlex="60">
+        <div class="text-truncate banner-card-title" style="font-size: 14px; font-weight: 500;">{{cat?.title}}</div>
+        <p class="text-truncate hint-text" style="font-size: 12px; color: rgba(0,0,0,0.8);"> By - {{cat?.creator?.profile?.first_name}}</p>
+      </div>
+    </div>
+  </div>
+</mat-card>

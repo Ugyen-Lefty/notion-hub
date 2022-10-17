@@ -1,0 +1,34 @@
+<div fxLayout="row" fxLayoutAlign="start center" style="height: 100vh; margin-left: 100px; margin-right: 100px;">
+  <div fxFlex="50" style="height: 100%; overflow-y: auto;">
+    <div fxLayoutAlign="center center" class="h-full">
+      <div class="p-32 rounded-8 bg-white">
+        <div class="float-start">
+          <img src="https://asmpa.selise.cloud/1665058546_2300f5e0641964b552fd3567fcf836_newlogo.png" alt="logo" height="100px" style="margin-bottom: 50px;">
+          <div class="text-center">
+            <h1 style="font-size: 25px;">Login to your account</h1>
+          </div>
+          <div class="">
+            <p class="text-center text-16" style="color: #797979; margin-bottom: 50px;">Don't have an account yet?<a href="app/auth/signup"><span style="color: #dc4361;"><b> Sign up</b></span></a></p>
+          </div>
+        </div>
+        <div [formGroup]="signInForm">
+          <mat-form-field appearance="outline" class="w-full">
+            <mat-label>Email</mat-label>
+            <input matInput type="text" formControlName="email">
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="w-full" style="margin-top: 20px;">
+            <mat-label>Password</mat-label>
+            <input matInput type="password" formControlName="password">
+          </mat-form-field>
+            <mat-checkbox formControlName="required" style="margin-top: 20px; margin-bottom: 20px; float: left;">Remember me</mat-checkbox>
+          </div>
+          <button mat-raised-button style="background-color: #dc4361; color: white; width: 100%;" (click)="userLogin()">Login</button>
+      </div>
+    </div>
+</div>
+  <div fxLayoutAlign="center center" fxFlexFill fxFlex="50">
+    <div class="text-white p-32">
+     <img src="https://asmpa.selise.cloud/1665106854_f48d588da6caa07b4fe942d4a9fdbb_login-page.png">
+    </div>
+  </div>
+</div>

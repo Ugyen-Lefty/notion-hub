@@ -1,0 +1,146 @@
+.consultant {
+  position: relative;
+
+  .left-container {
+    padding: 24px;
+position: sticky;
+    top: 100px;
+    &__card {
+      width: 100%;
+      padding: 14px;
+      border-radius: 4px;
+      border: 1px solid rgba(0, 0, 0, 0.16);
+      cursor: pointer;
+
+      .image {
+        height: 40px;
+        width: 40px;
+        object-fit: cover;
+        margin-right: 12px;
+
+        img  {
+          width: 100%;
+          height: 100%;
+          border-radius: 50%;
+        }
+      }
+      .name {
+        color: rgba(#000, 0.8);
+        margin: 0;
+      }
+      .title {
+        color: rgba(#000, 0.6);
+        font-size: 14px;
+        margin: 0;
+      }
+
+      &:hover {
+        border-color: #D72D49;
+      }
+      &.selected {
+        border-color: #D72D49;
+        .name {
+          color: #D72D49;
+        }
+      }
+    }
+  }
+
+  .right-container {
+    //background: white;
+    .about-card {
+      border-top: 4px solid #D72D49;
+      border-right: 4px;
+      padding: 24px;
+
+      .image {
+        height: 90px;
+        width: 90px;
+        object-fit: cover;
+        margin-right: 12px;
+
+        img  {
+          width: 100%;
+          height: 100%;
+          border-radius: 50%;
+        }
+      }
+    }
+
+
+    .work-container {
+
+    }
+  }
+}
+
+.bg-white {
+  background: white;
+  border-radius: 4px;
+}
+
+:host::ng-deep {
+  .mat-form-field-appearance-outline .mat-form-field-infix {
+    padding: .6em 0 .6em 0;
+  }
+  .mat-form-field-label-wrapper {
+    top: -1.2em;
+    padding-top: 0.84375em;
+  }
+  .mat-form-field-wrapper {
+    background: #F0F0F0;
+    border-radius: 4px;
+  }
+  mat-form-field-appearance-outline.mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label, .mat-form-field-appearance-outline.mat-form-field-can-float .mat-input-server:focus+.mat-form-field-label-wrapper .mat-form-field-label {
+    transform: translateY(-1em) scale(0.75) !important;
+    width: 133.3333333333%;
+  }
+}
+
+
+.custom-primary-button {
+  height: 40px;
+  width: 100%;
+  padding: 0 20px ;
+  border-radius: 4px;
+  cursor: pointer;
+  background: #DC4361;
+  color: white;
+  //&:hover {
+  //  background: rgba(white, 0.06);
+  //}
+}
+
+
+.target-activity {
+
+  %dimension {
+    width: 40px;
+    height: 40px;
+  }
+  &__item {
+    position: relative;
+    border-left: 2px solid rgba(208, 209, 222, 0.64);
+
+    &:last-child {
+      border-color: transparent;
+    }
+    &-image {
+      @extend %dimension;
+
+      position: absolute;
+      top: 0;
+      left: 0;
+      transform: translateX(-50%);
+      border: 4px solid white;
+      margin: 0 !important;
+    }
+    &--activity {
+      //position: absolute;
+      padding-top: 24px;
+      width: calc(140% - 4px);
+      transform: translateX(-25%);
+
+    }
+  }
+}

@@ -1,0 +1,13 @@
+<div fxLayout="row" fxLayoutAlign="center center" class="pt-20">
+  <div fxLayout="row" fxLayoutGap="40px" fxFlex="85">
+    <div fxFlex="23">
+      <app-filter-widget (filter)="filterCategory($event)"></app-filter-widget>
+    </div>
+    <div fxFlex="50">
+      <app-pool [filter]="value"></app-pool>
+    </div>
+    <div fxFlex="23">
+      <app-discussion-widget></app-discussion-widget>
+    </div>
+  </div>
+  </div>

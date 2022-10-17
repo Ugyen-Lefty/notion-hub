@@ -1,0 +1,23 @@
+
+.banner-card {
+    cursor: pointer;
+    a {
+      color: inherit;
+    }
+  
+    &-list:hover {
+      color: var(--primary);
+    }
+  
+    &-hashtag:hover {
+      background-color: var(--primary);
+    }
+  }
+  
+  .sponsor-card {
+    border-radius: 12px;
+  }
+  
+* {
+  font-size: 14px;
+}

@@ -1,0 +1,18 @@
+* {
+  font-size: 14px;
+}
+.text-area {
+  align-self: auto;
+    box-sizing: border-box;
+    height: auto;
+    margin: 8px 1px 1px 0;
+    padding: 10px 16px 16px;
+    border-radius: 8px;
+}
+.title {
+  border: none;
+  width: 100%;
+  &:focus {
+    outline: none;
+  }
+}

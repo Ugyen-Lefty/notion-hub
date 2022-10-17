@@ -1,0 +1,13 @@
+mat-checkbox ::ng-deep .mat-checkbox-inner-container {
+  width: 25px;
+  height: 25px;
+}
+
+.disabled {
+  background-color: grey;
+}
+
+.enabled {
+  background-color: var(--primary);
+  color: white;
+}

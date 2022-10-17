@@ -1,0 +1,28 @@
+<mat-card class=" sponsor-card" style="box-shadow: none; border-radius: 4px;">
+  <p style="font-size: 16px">Proposals</p>
+  <mat-radio-group aria-label="Select an option" fxLayout="column" fxLayoutGap="20px">
+    <mat-radio-button checked value="all" fxLayout="column">
+      <p style="font-weight: 450; font-size: 14px;" class="mb-0 pl-8">Open for Funding</p>
+    </mat-radio-button>
+    <mat-radio-button value="common" fxLayout="column">
+      <p style="font-weight: 450; font-size: 14px;" class="mb-0 pl-8">Ongoing Proposals</p>
+    </mat-radio-button>
+  </mat-radio-group>
+    <mat-calendar style="padding: 10px;"></mat-calendar>
+</mat-card>
+
+<mat-card class=" sponsor-card mb-20 mt-20" style="box-shadow: none; border-radius: 4px;">
+  <p style="font-size: 16px; font-weight: 400">Popular Categories</p>
+  <div class="banner-card border-radius-8" *ngFor="let cat of category">
+    <div fxLayout="row" fxLayoutGap="12px" fxLayoutAlign="start center" class="banner-card-list mb-20">
+      <div fxFlex="20" class="banner-card-img">
+        <img [src]="'./assets/images/'+cat?.icon+'.svg'" width="40"
+            height="40">
+      </div>
+      <div fxFlex="80">
+        <div class="text-truncate font-size-16 banner-card-title" style="font-weight: 500;">{{cat?.name}}</div>
+        <p class="font-size-12 text-truncate hint-text mb-0" style="font-size: 12px; color: rgba(151, 152, 157, 1)">{{cat?.count}} post(s)</p>
+      </div>
+    </div>
+  </div>
+</mat-card>

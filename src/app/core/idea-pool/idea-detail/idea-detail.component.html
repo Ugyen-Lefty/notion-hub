@@ -1,0 +1,219 @@
+<div fxLayout="row" fxLayoutGap="30" fxLayoutAlign="center" style="padding: 20px 120px 120px 120px; height: 750px">
+  <div fxFlex="40">
+    <app-idea-tree [isConverted]="isConvert" (converted)="toggleConvert($event)"></app-idea-tree>
+  </div>
+  <div fxFlex="70">
+    <div fxLayout="column">
+      <ng-container *ngIf="!isConvert">
+        <mat-card class=" sponsor-card mb-20" style="box-shadow: none" fxLayout="row" fxLayoutGap="20">
+          <img src="assets/images/pullidea.svg">
+          <div>
+            <p style="font-size: 14px; font-weight: 500;">Pull Idea</p>
+            <div style="color: #4d4d4d;">
+              You can pull this idea if you like it and convert the idea tree into a proposal after pulling it.
+            </div>
+          </div>
+          <div fxFlexAlign="center">
+            <button mat-raised-button style="background-color: #dc4361; color: white; box-shadow: none; font-size: 14px; font-weight: 500;" (click)="pullIdea()">Pull Idea</button>
+          </div>
+        </mat-card>
+        <ng-container>
+          <ng-container>
+            <div fxLayout="column" style="background-color: white; border-radius: 15px;" fxLayoutGap="0px">
+              <div fxLayout="row" fxLayoutGap="10px" style="padding: 15px 15px 0 15px"
+                fxLayoutAlign="space-between center">
+                <div fxLayout="row" fxLayoutGap="10px">
+                  <img [src]="'https://notion-hub.fly.dev/' + forum?.creator?.profile_url"
+                    height="34px" width="34px" style="border-radius: 50%">
+                  <div fxLayout="column" fxLayoutAlign="center start">
+                    <div style="font-size: 12px; font-weight: 500">{{forum?.creator.profile.first_name}} {{forum?.creator?.profile['last_name']}}</div>
+                    <p style="font-size: 12px; font-weight: 400; color: rgba(0,0,0,0.4);">{{forum?.creator.profile.role}} | posted todayx</p>
+                  </div>
+                </div>
+                <div>
+                  <!-- <mat-icon [matMenuTriggerFor]="menu" class="cursor-pointer">more_vert</mat-icon> -->
+                  <mat-menu #menu="matMenu">
+                    <button mat-menu-item>
+                      <mat-icon class="material-icons-outlined text-20">visibility</mat-icon>
+                      <span>View Details</span>
+                    </button>
+                    <!-- <button mat-menu-item (click)="deleteJob(job)"> -->
+                    <button mat-menu-item>
+                      <mat-icon class="material-icons-outlined text-20">delete</mat-icon>
+                      <span>Delete</span>
+                    </button>
+                  </mat-menu>
+                </div>
+              </div>
+              <div fxLayout="column">
+                <div fxLayout="row" style="padding: 15px 15px 0 15px" fxLayoutGap="20px">
+                  <div fxLayout="column" fxLayoutGap="10px">
+                    <div>
+                      <p style="font-size: 16px; font-weight: 400;">{{forum?.title}}</p>
+                    </div>
+                    <div fxLayout="row">
+                      <div>
+                        <span *ngIf="forum?.visibility === 'common'" class="chip-tag inline-block emerald-bg mr-8"
+                          style="background-color: rgba(220, 67, 97, 0.16); color: rgba(220, 67, 97, 1); font-weight: 500;">
+                          Public
+                        </span>
+                        <span *ngIf="forum?.visibility === 'personal'" class="chip-tag inline-block emerald-bg mr-8"
+                          style="background-color: rgba(45, 156, 219, 0.16); color: rgba(45, 156, 219, 1); font-weight: 500;">
+                          Consensual
+                        </span>
+                        <span class="chip-tag inline-block emerald-bg mr-8" *ngFor="let cat of forum?.categories" style="font-size: 10px; color: rgba(0,0,0,0.3)">
+                          {{cat}}
+                        </span>
+                      </div>
+                    </div>
+                    <div>
+                      <p style="font-size: 14px; color:rgba(0, 0, 0, 0.8)">{{forum?.description}}</p>
+                    </div>
+                  </div>
+                </div>
+                <div fxLayoutAlign="center">
+                  <hr width="95%">
+                </div>
+
+                <div fxLayout="row" fxLayoutGap="15px" fxLayoutAlign="start center" class="ml-20" style="cursor: pointer">
+                  <div fxLayout="row" fxLayoutAlign="center start" fxLayoutGap="5px">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="23" height="22" viewBox="0 0 23 22" fill="none">
+                      <path d="M11.1222 10.8343C11.3288 11.058 11.6682 11.058 11.8748 10.8343L15.0653 7.37225C15.9947 6.36789 15.9424 4.69778 14.8985 3.77376C13.8546 2.84518 12.4967 3.26111 11.8025 4.00792L11.4734 4.35916L11.1694 4.00658C10.4936 3.27503 9.12708 2.83245 8.04983 3.77254C7.03455 4.69718 6.97552 6.36577 7.91111 7.37225L11.1222 10.8343ZM8.67552 4.5071C9.29236 3.96141 10.101 4.24577 10.5024 4.68141L11.4982 5.75035L12.494 4.68141C12.8925 4.25305 13.7038 3.96111 14.3198 4.50704C15.0204 5.13245 14.9136 6.15956 14.4193 6.69403L11.497 9.83997L8.55156 6.69318C8.08229 6.1675 7.97899 5.13251 8.67552 4.5071ZM19.4747 13.3536C19.1943 13.0923 18.8253 12.9483 18.4381 12.9483C18.0692 12.9483 17.7038 13.077 17.4164 13.3157L15.6027 14.8075C15.5458 14.8544 15.4751 14.8798 15.4022 14.8798H14.1738C14.3103 14.5882 14.3657 14.2511 14.314 13.9028C14.1976 13.0535 13.4391 12.4562 12.6097 12.4562H8.34792C7.7355 12.4562 7.16441 12.6607 6.65087 13.0395L5.51458 13.9105H3.47222C3.21247 13.9105 3 14.1286 3 14.3952C3 14.6619 3.21244 14.8815 3.44566 14.8815L5.80707 14.8818L7.19009 13.8119C7.51828 13.562 7.91672 13.4257 8.32254 13.4257H12.6522C13.0433 13.4257 13.3606 13.7513 13.3606 14.153C13.3606 14.5547 13.0433 14.88 12.6522 14.88H10.0568C9.79852 14.88 9.58455 15.0996 9.58455 15.3647C9.58455 15.6299 9.79852 15.8495 10.0568 15.8495H15.3752C15.6592 15.8495 15.9359 15.751 16.1608 15.5692L17.9795 14.077C18.1049 13.9748 18.2599 13.9179 18.411 13.9179C18.5585 13.9179 18.7024 13.971 18.8168 14.077C19.1155 14.3535 19.0935 14.8191 18.791 15.0656L15.8189 17.5085C15.5951 17.6923 15.3169 17.7925 15.0303 17.7925H3.47222C3.21247 17.7925 3.02656 18.0104 3.02656 18.2769C3.02656 18.5435 3.21244 18.7619 3.44566 18.7619H15.0299C15.5316 18.7619 16.015 18.584 16.4058 18.2657L19.3838 15.8192C19.7453 15.5238 19.9593 15.0807 19.9475 14.6071C20.0148 14.1327 19.7964 13.6749 19.4747 13.3536Z" fill="black" fill-opacity="0.6"/>
+                      <path d="M19.5807 13.2474L19.5807 13.2475C19.9228 13.5892 20.1679 14.0865 20.0977 14.6158C20.1067 15.1328 19.8715 15.6142 19.479 15.9351L19.5807 13.2474ZM19.5807 13.2474L19.5769 13.2438C19.2684 12.9563 18.8628 12.7983 18.4381 12.7983C18.0349 12.7983 17.6356 12.9388 17.3208 13.2C17.3207 13.2001 17.3206 13.2002 17.3205 13.2003L15.5074 14.6917L15.5074 14.6917C15.4771 14.7167 15.44 14.7298 15.4022 14.7298H14.3937C14.4789 14.466 14.5062 14.1772 14.4625 13.8816C14.3346 12.9521 13.5072 12.3062 12.6097 12.3062H8.34792C7.70006 12.3062 7.09829 12.5231 6.56183 12.9188L6.56182 12.9188L6.55961 12.9205L5.46371 13.7605H3.47222C3.12595 13.7605 2.85 14.0495 2.85 14.3952C2.85 14.7346 3.11986 15.0315 3.44564 15.0315C3.44565 15.0315 3.44565 15.0315 3.44566 15.0315L5.80705 15.0318L5.8583 15.0318L5.89885 15.0004L7.28096 13.9313C7.2811 13.9312 7.28124 13.9311 7.28138 13.9309C7.58397 13.7007 7.95046 13.5757 8.32254 13.5757H12.6522C12.9568 13.5757 13.2106 13.8304 13.2106 14.153C13.2106 14.4755 12.9568 14.73 12.6522 14.73H10.0568C9.712 14.73 9.43455 15.0205 9.43455 15.3647C9.43455 15.709 9.71201 15.9995 10.0568 15.9995H15.3752C15.6941 15.9995 16.004 15.8889 16.2551 15.6858L16.256 15.6851L18.0743 14.1933C18.0743 14.1932 18.0744 14.1932 18.0744 14.1931C18.1749 14.1113 18.2967 14.0679 18.411 14.0679C18.5219 14.0679 18.629 14.1075 18.7148 14.187L18.7149 14.1871C18.9464 14.4013 18.9283 14.7602 18.6962 14.9493L18.6957 14.9497L15.7237 17.3926C15.5264 17.5546 15.2818 17.6425 15.0303 17.6425H3.47222C3.11503 17.6425 2.87656 17.943 2.87656 18.2769C2.87656 18.6043 3.10916 18.9119 3.44566 18.9119H15.0299C15.5674 18.9119 16.084 18.7212 16.5005 18.382L16.501 18.3816L19.4787 15.9353L19.5807 13.2474ZM11.6927 3.90579L11.4781 4.13482L11.283 3.90863L11.2831 3.90857L11.2796 3.90479C10.5677 3.13421 9.10877 2.64934 7.9512 3.65953L7.95118 3.6595L7.94883 3.66164C6.87104 4.6432 6.80964 6.40749 7.80113 7.47426C7.80117 7.4743 7.80121 7.47434 7.80125 7.47438L11.012 10.9361C11.278 11.2241 11.719 11.224 11.985 10.9361L11.9851 10.936L15.1754 7.47413C16.1602 6.40984 16.1066 4.64308 14.9982 3.66168C13.8741 2.66178 12.4231 3.12011 11.6928 3.90559C11.6928 3.90566 11.6927 3.90573 11.6927 3.90579ZM10.3921 4.78306L10.3927 4.78366L11.3885 5.8526L11.4982 5.97041L11.608 5.8526L12.6038 4.78366L12.6039 4.78357C12.7824 4.5916 13.0561 4.4288 13.3514 4.37657C13.6421 4.32518 13.9509 4.3806 14.2201 4.61915C14.8474 5.17935 14.7564 6.10828 14.3094 6.59194C14.3093 6.59202 14.3093 6.5921 14.3092 6.59218L11.4966 9.62002L8.66232 6.592C8.23979 6.11717 8.15132 5.17984 8.77531 4.61909C9.04542 4.38035 9.35404 4.32357 9.64405 4.37404C9.93878 4.42533 10.2122 4.58779 10.3921 4.78306Z" stroke="black" stroke-opacity="0.6" stroke-width="0.3"/>
+                      </svg>
+                      <p>3</p>
+                  </div>
+                  <div fxLayout="row" fxLayoutAlign="center start">
+                    <img src="assets/images/comment.svg">
+                    <p>{{forum.comments_count || 0}}</p>
+                  </div>
+                  <div fxLayout="row" fxLayoutAlign="center start" fxLayoutGap="5px">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="17" viewBox="0 0 20 17" fill="none">
+                      <path d="M11.5 6.75H8.5C8.03668 6.74737 7.59309 6.56216 7.26546 6.23454C6.93784 5.90691 6.75263 5.46332 6.75 5V2C6.75263 1.53668 6.93784 1.09309 7.26546 0.765464C7.59309 0.437842 8.03668 0.252625 8.5 0.25H11.5C11.9633 0.252625 12.4069 0.437842 12.7345 0.765464C13.0622 1.09309 13.2474 1.53668 13.25 2V5C13.2474 5.46332 13.0622 5.90691 12.7345 6.23454C12.4069 6.56216 11.9633 6.74737 11.5 6.75V6.75ZM8.5 1.75C8.4337 1.75 8.37011 1.77634 8.32322 1.82322C8.27634 1.87011 8.25 1.9337 8.25 2V5C8.25 5.0663 8.27634 5.12989 8.32322 5.17678C8.37011 5.22366 8.4337 5.25 8.5 5.25H11.5C11.5663 5.25 11.6299 5.22366 11.6768 5.17678C11.7237 5.12989 11.75 5.0663 11.75 5V2C11.75 1.9337 11.7237 1.87011 11.6768 1.82322C11.6299 1.77634 11.5663 1.75 11.5 1.75H8.5Z" fill="#666666"/>
+                      <path d="M4 16.75H2C1.53668 16.7474 1.09309 16.5622 0.765464 16.2345C0.437842 15.9069 0.252625 15.4633 0.25 15V13C0.252625 12.5367 0.437842 12.0931 0.765464 11.7655C1.09309 11.4378 1.53668 11.2526 2 11.25H4C4.46332 11.2526 4.90691 11.4378 5.23454 11.7655C5.56216 12.0931 5.74737 12.5367 5.75 13V15C5.74737 15.4633 5.56216 15.9069 5.23454 16.2345C4.90691 16.5622 4.46332 16.7474 4 16.75V16.75ZM2 12.75C1.9337 12.75 1.87011 12.7763 1.82322 12.8232C1.77634 12.8701 1.75 12.9337 1.75 13V15C1.75 15.0663 1.77634 15.1299 1.82322 15.1768C1.87011 15.2237 1.9337 15.25 2 15.25H4C4.0663 15.25 4.12989 15.2237 4.17678 15.1768C4.22366 15.1299 4.25 15.0663 4.25 15V13C4.25 12.9337 4.22366 12.8701 4.17678 12.8232C4.12989 12.7763 4.0663 12.75 4 12.75H2Z" fill="#666666"/>
+                      <path d="M11 16.75H9C8.53668 16.7474 8.09309 16.5622 7.76546 16.2345C7.43784 15.9069 7.25263 15.4633 7.25 15V13C7.25263 12.5367 7.43784 12.0931 7.76546 11.7655C8.09309 11.4378 8.53668 11.2526 9 11.25H11C11.4633 11.2526 11.9069 11.4378 12.2345 11.7655C12.5622 12.0931 12.7474 12.5367 12.75 13V15C12.7474 15.4633 12.5622 15.9069 12.2345 16.2345C11.9069 16.5622 11.4633 16.7474 11 16.75V16.75ZM9 12.75C8.9337 12.75 8.87011 12.7763 8.82322 12.8232C8.77634 12.8701 8.75 12.9337 8.75 13V15C8.75 15.0663 8.77634 15.1299 8.82322 15.1768C8.87011 15.2237 8.9337 15.25 9 15.25H11C11.0663 15.25 11.1299 15.2237 11.1768 15.1768C11.2237 15.1299 11.25 15.0663 11.25 15V13C11.25 12.9337 11.2237 12.8701 11.1768 12.8232C11.1299 12.7763 11.0663 12.75 11 12.75H9Z" fill="#666666"/>
+                      <path d="M18 16.75H16C15.5367 16.7474 15.0931 16.5622 14.7655 16.2345C14.4378 15.9069 14.2526 15.4633 14.25 15V13C14.2526 12.5367 14.4378 12.0931 14.7655 11.7655C15.0931 11.4378 15.5367 11.2526 16 11.25H18C18.4633 11.2526 18.9069 11.4378 19.2345 11.7655C19.5622 12.0931 19.7474 12.5367 19.75 13V15C19.7474 15.4633 19.5622 15.9069 19.2345 16.2345C18.9069 16.5622 18.4633 16.7474 18 16.75ZM16 12.75C15.9337 12.75 15.8701 12.7763 15.8232 12.8232C15.7763 12.8701 15.75 12.9337 15.75 13V15C15.75 15.0663 15.7763 15.1299 15.8232 15.1768C15.8701 15.2237 15.9337 15.25 16 15.25H18C18.0663 15.25 18.1299 15.2237 18.1768 15.1768C18.2237 15.1299 18.25 15.0663 18.25 15V13C18.25 12.9337 18.2237 12.8701 18.1768 12.8232C18.1299 12.7763 18.0663 12.75 18 12.75H16Z" fill="#666666"/>
+                      <path d="M17 12.75C16.8019 12.7474 16.6126 12.6676 16.4725 12.5275C16.3324 12.3874 16.2526 12.1981 16.25 12V10C16.25 9.9337 16.2237 9.87011 16.1768 9.82322C16.1299 9.77634 16.0663 9.75 16 9.75H4C3.9337 9.75 3.87011 9.77634 3.82322 9.82322C3.77634 9.87011 3.75 9.9337 3.75 10V12C3.75 12.1989 3.67098 12.3897 3.53033 12.5303C3.38968 12.671 3.19891 12.75 3 12.75C2.80109 12.75 2.61032 12.671 2.46967 12.5303C2.32902 12.3897 2.25 12.1989 2.25 12V10C2.25263 9.53668 2.43784 9.09309 2.76546 8.76546C3.09309 8.43784 3.53668 8.25263 4 8.25H16C16.4633 8.25263 16.9069 8.43784 17.2345 8.76546C17.5622 9.09309 17.7474 9.53668 17.75 10V12C17.7474 12.1981 17.6676 12.3874 17.5275 12.5275C17.3874 12.6676 17.1981 12.7474 17 12.75V12.75Z" fill="#666666"/>
+                      <path d="M10 12.75C9.80189 12.7474 9.61263 12.6676 9.47253 12.5275C9.33244 12.3874 9.25259 12.1981 9.25 12V6C9.25 5.80109 9.32902 5.61032 9.46967 5.46967C9.61032 5.32902 9.80109 5.25 10 5.25C10.1989 5.25 10.3897 5.32902 10.5303 5.46967C10.671 5.61032 10.75 5.80109 10.75 6V12C10.7474 12.1981 10.6676 12.3874 10.5275 12.5275C10.3874 12.6676 10.1981 12.7474 10 12.75V12.75Z" fill="#666666"/>
+                      </svg>
+                      <p>3</p>
+                  </div>
+                  <div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </ng-container>
+        </ng-container>
+      </ng-container>
+      <ng-container *ngIf="isConvert">
+        <mat-card class="mb-20" style="box-shadow: none" fxLayout="row" fxLayoutGap="20" fxLayoutAlign="space-between center">
+          <div>
+            <p style="font-size: 18px; font-weight: 500">Create Proposal</p>
+          </div>
+          <div fxLayout="row" fxLayoutGap="20">
+            <button mat-raised-button style="background-color: #dc4361; color: white; box-shadow: none;"
+              (click)="toggleConvert(false)">Cancel</button>
+            <button mat-raised-button style="background-color: #dc4361; color: white; box-shadow: none;" (click)="createProposal()">Create
+              Proposal</button>
+          </div>
+        </mat-card>
+        <div fxFlex="0 0 calc(50% - 15px)" [formGroup]="proposalForm">
+          <mat-card class="sponsor-card" style="box-shadow: none;">
+            <div fxLayout="column" fxLayoutGap="10px">
+              <h2>Basic details</h2>
+              <div>
+                <mat-form-field appearance="outline" style="width: 100%">
+                  <mat-label>Name of the Proposal</mat-label>
+                  <input matInput type="text" formControlName="title">
+                </mat-form-field>
+              </div>
+              <div>
+                <textarea rows="8" cols="65" placeholder="Proposal summary" class="text-area"
+                  formControlName="summary"></textarea>
+              </div>
+              <mat-form-field appearance="outline" style="width: 100%">
+                <mat-label>Expected fund</mat-label>
+                <input matInput type="text" formControlName="expected_fund">
+              </mat-form-field>
+              <mat-form-field appearance="outline" style="width: 100%">
+                <mat-label>Team Name</mat-label>
+                <input matInput type="text" formControlName="team_name">
+              </mat-form-field>
+              <mat-chip-list selectable multiple>
+                <mat-chip #c="matChip" *ngFor="let option of categories_list" [value]="option"
+                  (click)="toggleSelection(c, option)" style="cursor: pointer; border-radius: 5px;">
+                  {{option}}
+                </mat-chip>
+              </mat-chip-list>
+              <div>
+                <h2 class="mt-8">Proposal cover image</h2>
+                <div fxLayout="column">
+                  <div fxLayout="row" style="border: 1px solid lightgray; padding: 10px;"
+                    fxLayoutAlign="space-between center">
+                    <div fxFlexAlign="center center">
+                      <button mat-raised-button style="background-color: #dc4361; color: white; width: 100%;">
+                        <input #imageInput type="file" id="input-file-id" hidden (change)="processFile(imageInput)">
+                        <mat-icon>add</mat-icon><label for="input-file-id">Choose</label>
+                      </button>
+                    </div>
+                    <div>
+                      <div fxLayout="row" fxLayoutAlign="end" fxLayoutGap="10px" class="w-100">
+                        <!-- <button mat-raised-button
+                          style="background-color: var(--primary); color: white;">Upload</button>
+                        <button mat-raised-button
+                          style="border: 1px solid var(--primary); color: var(--primary);">Cancel</button> -->
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    style="border-bottom: 1px solid lightgray; border-left: 1px solid lightgray; border-right: 1px solid lightgray; padding: 10px; height: 140px;" *ngIf="preview">
+                  <img [src]="preview" height="100px" width="auto">
+                  </div>
+                <div fxLayout="column" fxLayoutGap="10px" class="mt-8">
+                  <mat-label>Team Member 1</mat-label>
+                  <mat-form-field appearance="outline" style="width: 100%">
+                    <input matInput type="text" placeholder="Name" #name1>
+                  </mat-form-field>
+                  <mat-form-field appearance="outline" style="width: 100%">
+                    <input matInput type="text" placeholder="Phone number" #phone1>
+                  </mat-form-field>
+                  <mat-label>Team Member 2</mat-label>
+                  <mat-form-field appearance="outline" style="width: 100%">
+                    <input matInput type="text" placeholder="Name" #name2 >
+                  </mat-form-field>
+                  <mat-form-field appearance="outline" style="width: 100%">
+                    <input matInput type="text" placeholder="Phone number" #phone2 >
+                  </mat-form-field>
+                  <button mat-fab style="background-color: #dc4361;">
+                    <mat-icon>add</mat-icon>
+                  </button>
+                  <h2 class="mt-8">Attachments</h2>
+                  <div fxLayout="row" style="border: 1px solid lightgray; padding: 10px;"
+                  fxLayoutAlign="space-between center">
+                  <div fxFlexAlign="center center">
+                    <button mat-raised-button style="background-color: #dc4361; color: white; width: 100%;">
+                      <input #imageInput type="file" id="input-file-id" hidden (change)="processFile(imageInput)">
+                      <mat-icon>add</mat-icon><label for="input-file-id">Choose</label>
+                    </button>
+                  </div>
+                  <div>
+                    <div fxLayout="row" fxLayoutAlign="end" fxLayoutGap="10px" class="w-100">
+                      <!-- <button mat-raised-button
+                        style="background-color: var(--primary); color: white;">Upload</button>
+                      <button mat-raised-button
+                        style="border: 1px solid var(--primary); color: var(--primary);">Cancel</button> -->
+                    </div>
+                  </div>
+                </div>
+                </div>
+                </div>
+              </div>
+            </div>
+          </mat-card>
+        </div>
+      </ng-container>
+
+    </div>
+  </div>
+</div>

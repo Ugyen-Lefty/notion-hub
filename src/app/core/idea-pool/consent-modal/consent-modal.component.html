@@ -1,0 +1,22 @@
+<div>
+  <h1>Consensual</h1>
+  <hr width="100%">
+</div>
+<mat-dialog-content>
+<div fxLayout="row" fxLayoutGap="20px">
+ <div style="padding-top: 5px">
+  <mat-checkbox style="height: 25px; width: 25px" (change)="isChecked($event.checked)"></mat-checkbox>
+ </div>
+ <div >
+  <p>I understand that this post contains the creator’s unique business idea or creativity which is protected. I agree
+    not to copy, reproduce, modify, transmit ot exploit the content in anyway.</p>
+ </div>
+</div>
+  </mat-dialog-content>
+
+  <mat-dialog-actions>
+<div fxLayout="row" fxLayoutAlign="end" fxLayoutGap="5px" class="w-100">
+    <button mat-raised-button style="border: 1px solid var(--primary); color: var(--primary);" (click)="cancel()">Cancel</button>
+    <button mat-raised-button [ngClass]="!checked? 'disabled': 'enabled'" (click)="askPermission()" [disabled]="!checked">Proceed</button>
+  </div>
+  </mat-dialog-actions>

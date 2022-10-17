@@ -1,0 +1,155 @@
+<div fxLayout="column" fxLayoutGap="20px">
+  <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="15"
+    style="background-color: white; margin-left: 15%; margin-right: 15%; margin-top: 25px; padding: 20px; border-radius: 4px; display: flex;">
+    <div>
+      <mat-label><p style="font-size: 18px; font-weight: 500">Open for Funding ({{proposals?.length || 0}})</p></mat-label>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="end" fxLayoutGap="20">
+      <!-- <div>
+        <mat-form-field appearance="outline">
+          <input matInput type="text" placeholder="Search proposals" style="height: 20px;">
+          <button matSuffix mat-icon-button>
+            <mat-icon>search</mat-icon>
+          </button>
+        </mat-form-field>
+      </div> -->
+      <div>
+        <button mat-raised-button style="background-color: #dc4361; color: white; width: 100%;" (click)="createProposal()">
+          <mat-icon>add</mat-icon> Create Proposal
+        </button>
+      </div>
+    </div>
+  </div>
+  <div *ngFor="let item of proposals" (click)="openProposal(item?.id)" class="cursor-pointer" fxLayout="column" style="background-color: white; border-radius: 4px;" fxLayoutGap="0px">
+    <div fxLayout="row" fxLayoutGap="10px" style="padding: 20px">
+      <div fxFlex="25">
+        <img [src]="'https://notion-hub.fly.dev/'+item?.attachment_urls[0]" height="208px"
+          width="208px" style="border-radius: 10px">
+      </div>
+      <div fxFlex="75" style="padding: 10px;">
+        <div fxLayout="column" fxLayoutGap="10px">
+          <div>
+            <div style="font-size: 16px; font-weight: 500">{{ item?.title }}</div>
+          </div>
+          <div fxLayout="row">
+            <div *ngFor="let cat of item?.categories">
+              <span class="chip-tag inline-block emerald-bg mr-8" style="color: rgba(0,0,0,0.4);">
+                {{cat}}
+              </span>
+            </div>
+          </div>
+          <div fxLayout="row" fxLayoutAlign="space-between">
+            <div fxLayout="column">
+              <div style="font-size: 12px;color: rgba(0,0,0,0.4);">
+                Team
+              </div>
+              <div style="font-size: 12px; font-weight: 500">
+                {{ item?.team_name }}
+              </div>
+            </div>
+            <div fxLayout="column">
+              <div style="font-size: 12px;color: rgba(0,0,0,0.4);">
+                Expected Funding
+              </div>
+              <div style="font-size: 12px; font-weight: 500; color: var(--primary);">
+                Nu {{ item?.expected_fund }}
+              </div>
+            </div>
+            <div fxLayout="column">
+              <div style="font-size: 12px;color: rgba(0,0,0,0.4);">
+                Email
+              </div>
+              <div style="font-size: 12px; font-weight: 500">
+                {{ item?.creator?.email }}
+              </div>
+            </div>
+            <div fxLayout="column">
+              <div style="font-size: 12px;color: rgba(0,0,0,0.4);">
+                Phone
+              </div>
+              <div style="font-size: 12px; font-weight: 500">
+                +975 {{ item?.creator?.profile?.phone }}
+              </div>
+            </div>
+          </div>
+          <div fxLayout="column">
+            <div>
+           <p style="font-size: 14px; font-weight: 500">summary</p>
+            </div>
+            <p style="font-size: 14px; color: rgba(0,0,0,0.6);" class="line">
+              {{item.summary}}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- <ng-container *ngFor="let forum of forums">
+    <ng-container *ngIf="forum.content_type === 'forum'">
+      <div fxLayout="column" style="background-color: white; border-radius: 15px;" fxLayoutGap="0px">
+        <div fxLayout="row" fxLayoutGap="10px" style="padding: 15px 15px 0 15px" fxLayoutAlign="space-between center">
+          <div fxLayout="row" fxLayoutGap="10px">
+            <img src="https://asmpa.selise.cloud/1665387438_754faec2448fcb0e299713e9c2f019_woman.jpeg" height="34px"
+              width="34px" style="border-radius: 50%">
+            <div fxLayout="column" fxLayoutAlign="center start">
+              <b>{{forum.creator.profile.first_name}} {{forum.creator.profile.last_name}}</b>
+              <p>{{forum.creator.profile.role}} | posted 3 hours ago</p>
+            </div>
+          </div>
+          <div>
+            <mat-icon>more_vert</mat-icon>
+          </div>
+        </div>
+        <div style="padding: 0 15px 0 15px" *ngIf="!!forum.attachment_urls.length">
+          <img [src]="forum.attachment_urls[0]" style="border-radius: 5px; object-fit: cover; max-height: 378px;"
+            height="auto" width="100%">
+        </div>
+        <div fxLayout="column">
+          <div fxLayout="row" style="padding: 15px 15px 0 15px" fxLayoutGap="20px">
+            <div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px">
+              <div>
+                <mat-icon style="color: green;">arrow_upward</mat-icon>
+              </div>
+              <div>
+                <b>17</b>
+              </div>
+              <div>
+                <mat-icon>arrow_downward</mat-icon>
+              </div>
+            </div>
+            <div fxLayout="column" fxLayoutGap="10px">
+              <div>
+                <b>{{forum.title}}</b>
+              </div>
+              <div fxLayout="row">
+                <div *ngFor="let cat of forum.categories">
+                  <span class="chip-tag inline-block emerald-bg mr-8">
+                    {{cat}}
+                  </span>
+                </div>
+              </div>
+              <div>
+                <p>{{forum.description}}</p>
+              </div>
+            </div>
+          </div>
+          <div fxLayoutAlign="center">
+            <hr width="81%">
+          </div>
+          <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center">
+            <div fxLayout="row">
+              <img src="assets/images/comment.svg">
+              <p>23</p>
+            </div>
+            <div fxLayout="row">
+              <img src="assets/images/comment.svg">
+              <p>23</p>
+            </div>
+            <div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+  </ng-container> -->
+</div>

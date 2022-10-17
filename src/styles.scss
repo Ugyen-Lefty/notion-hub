@@ -1,0 +1,149 @@
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+/* You can add global styles to this file, and also import other style files */
+//@import 'assets/stylesheets/theme';
+@import '~@angular/material/theming';
+
+@import 'assets/stylesheets/common';
+@import 'assets/stylesheets/utilities';
+:root {
+  --primary: #DC4361;
+}
+$primary-color: var(--primary);
+$theme-primary: (
+  50: rgba(220, 67, 97, .1),
+  100: rgba(220, 67, 97, .2),
+  200: rgba(220, 67, 97, .3),
+  300: rgba(220, 67, 97, .4),
+  400: rgba(220, 67, 97, .5),
+  500: rgba(220, 67, 97, .6),
+  600: rgba(220, 67, 97, .7),
+  700: rgba(220, 67, 97, .8),
+  800: rgba(220, 67, 97, .9),
+  A700: $primary-color,
+  contrast: (
+    50: $dark-primary-text,
+    100: $dark-primary-text,
+    200: $dark-primary-text,
+    300: $dark-primary-text,
+    400: $dark-primary-text,
+    500: $light-primary-text,
+    600: $light-primary-text,
+    700: $light-primary-text,
+    800: $light-primary-text,
+    900: $light-primary-text
+  )
+);
+$primary: mat-palette($theme-primary, A700);
+$warning: mat-palette($mat-red, A700);
+$custom-theme: mat-light-theme($primary, $primary, $warning);
+
+@include angular-material-theme($custom-theme);
+
+body {
+  color: #222;
+  font-family: 'Roboto', sans-serif !important;
+  letter-spacing: 0.3px !important;
+  font-size: 16px !important;
+  -webkit-font-smoothing: antialiased !important;
+  line-height: 1.5 !important;
+  overflow-x: hidden !important;
+}
+
+html {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+*, *:before, *:after {
+  -webkit-box-sizing: inherit;
+  -moz-box-sizing: inherit;
+  box-sizing: inherit;
+}
+
+button, input {
+  font-family: Josefin Sans, sans-serif;
+}
+
+::-webkit-scrollbar {
+  width: 4px;
+  background-color: #ccc;
+}
+
+::-webkit-scrollbar-track {
+  border-radius: 10px;
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-image:
+    -webkit-gradient(
+        linear,
+        left bottom,
+        left top,
+        color-stop(0.44, #ccc),
+        color-stop(0.66, #ccc),
+        color-stop(0.77, #ccc)
+    );
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+a:hover {
+  color: var(--primary);
+}
+
+table {
+  border-collapse: collapse;
+}
+
+li {
+  list-style: none;
+}
+
+.timepicker-overlay {
+    z-index: 10000000 !important;
+}
+
+.timepicker-backdrop-overlay {
+    z-index: 10000000 !important;
+}
+
+.black-80 {
+  color: rgba(#000, 0.8)
+}
+
+.black-60 {
+  color: rgba(#000, 0.6)
+}
+
+.m-0 {
+  margin: 0;
+}
+
+.mr-12 {
+  margin-right: 12px;
+}
+.my-16 {
+  margin: 16px 0;
+}
+.mb-20 {
+  margin-bottom: 20px;
+}
+.width-full {
+  width: 100%;
+}

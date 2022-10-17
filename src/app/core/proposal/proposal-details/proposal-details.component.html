@@ -1,0 +1,91 @@
+<div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center">
+  <div fxFlex="30">
+    <mat-card class=" sponsor-card mb-20" style="box-shadow: none; padding-bottom: 50px; margin-bottom: 50px;">
+      <div fxLayout="column" fxLayoutGap="20px">
+        <img [src]="'https://notion-hub.fly.dev/' + proposal?.attachment_urls[0]" alt=""
+        style="border-radius: 4px;margin-bottom: 20px;" height="283px" width="350px">
+
+        <div fxLayout="column" fxLayoutGap="20px">
+          <div style="font-size: 22px">{{ proposal?.title }}</div>
+        </div>
+        <div fxLayout="row">
+          <div *ngFor="let option of proposal?.categories">
+            <span class="chip-tag inline-block emerald-bg mr-8" style="color: rgba(0,0,0,0.4);">
+              {{option}}
+            </span>
+          </div>
+        </div>
+       <div fxLayout="column" fxLayoutGap="2px">
+        <div style="font-size: 16px; color: rgba(0,0,0,0.3);">Team</div>
+        <div style="font-size: 14px;">{{ proposal?.team_name }}</div>
+       </div>
+
+      <div fxLayout="column" fxLayoutGap="2px">
+        <div style="font-size: 16px; color: rgba(0,0,0,0.3);">Funding</div>
+        <div style="font-size: 14px; color: #dc4361;">Nu {{ proposal?.expected_fund}}/-</div>
+      </div>
+
+     <div fxLayout="column" fxLayoutGap="2px">
+      <div style="font-size: 16px; color: rgba(0,0,0,0.3);">Created on</div>
+      <div style="font-size: 14px;">{{ proposal?.created_at | date }}</div>
+     </div>
+      <button mat-raised-button style="background-color: #dc4361; color: white; box-shadow: none;" (click)="appointment()">Make an Appointment</button>
+      <button mat-raised-button style="color: #dc4361; border: 1px solid #dc4361; box-shadow: none;">Interested</button>
+      </div>
+
+    </mat-card>
+  </div>
+  <div fxFlex="40">
+    <div fxLayout="row" fxLayoutGap="40">
+      <div fxFlex="50">
+        <mat-card [ngClass]="{selected: !isSelected}" class="sponsor-card mb-20 cursor-pointer" style="box-shadow: none; font-size: 16px; font-size: 500;"
+          (click)="toggleSelected(false)">
+          <img src="assets/images/proposal1.svg" style="margin-right: 20px;">Summary
+        </mat-card>
+      </div>
+      <div fxFlex="50">
+        <mat-card [ngClass]="{selected: isSelected}" class="sponsor-card mb-20 cursor-pointer" style="box-shadow: none; font-size: 16px; font-size: 500"
+          (click)="toggleSelected(true)">
+          <img src="assets/images/proposal2.svg" style="margin-right: 20px;">
+          Team Members
+        </mat-card>
+      </div>
+    </div>
+    <div *ngIf="!isSelected">
+      <mat-card class=" sponsor-card mb-20" style="box-shadow: none; padding-bottom: 50px; margin-bottom: 50px; height: 640px">
+        <p style="font-size: 14px; font-weight: 500">Summary</p>
+        <div style="font-size: 16px; color: rgba(0,0,0,0.6);">{{ proposal?.summary }}</div>
+      </mat-card>
+    </div>
+    <div *ngIf="isSelected">
+      <mat-card class=" sponsor-card mb-20" style="box-shadow: none;">
+        <div fxLayout="column" fxLayoutGap="6px">
+          <p style="font-size: 16px; font-weight: 500">Team Leader</p>
+          <div fxLayout="column" fxLayoutGap="4px">
+            <div><p style="color: rgba(0,0,0,0.3); margin-bottom: 2px;">NAME:</p>{{ proposal?.creator?.profile?.first_name }} {{ proposal?.creator?.profile?.last_name }}</div>
+          <div fxLayout="row" fxLayoutGap="4px" fxLayoutAlign="space-between center" style="font-size: 12px;">
+            <div><p style="color: rgba(0,0,0,0.3); margin-bottom: 2px;">Email:</p>{{ proposal?.creator?.email }}</div>
+            <div><p style="color: rgba(0,0,0,0.3); margin-bottom: 2px;">Gender:</p> {{ proposal?.creator?.profile?.gender }}</div>
+            <div><p style="color: rgba(0,0,0,0.3); margin-bottom: 2px;">Phone:</p> +975 {{ proposal?.creator?.profile?.phone }}</div>
+          </div>
+          </div>
+        </div>
+
+      </mat-card>
+      <mat-card class=" sponsor-card mb-20" style="box-shadow: none; padding-bottom: 50px; margin-bottom: 50px;">
+        <p style="font-size: 16px; font-weight: 500">Team Member</p>
+              <div *ngFor="let item of proposal?.proposal_team_members">
+          <div fxLayout="column" fxLayoutGap="6px">
+            <div fxLayout="column" fxLayoutGap="4px">
+            <div fxLayout="row" fxLayoutGap="100px" fxLayoutAlign="start center" style="font-size: 12px;">
+              <div><p style="color: rgba(0,0,0,0.3); margin-bottom: 2px;">Name:</p>{{ item?.name }}</div>
+              <div><p style="color: rgba(0,0,0,0.3); margin-bottom: 2px;">Phone:</p> +975 {{ item?.phone }}</div>
+            </div>
+            </div>
+          </div>
+          <hr>
+        </div>
+      </mat-card>
+    </div>
+  </div>
+</div>

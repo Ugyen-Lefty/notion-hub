@@ -1,0 +1,164 @@
+<div fxLayoutAlign="center start" class="consultant">
+  <div fxFlex="85" fxLayoutAlign="space-between start" style="margin-bottom: 24px">
+    <div fxFlex="0 0 calc(32% -24px) " class="left-container bg-white">
+      <p class="black-80">Consultants (5)</p>
+      <mat-form-field class="width-full" appearance="outline">
+        <mat-label>Search Consultants</mat-label>
+        <input matInput type="text">
+        <button matSuffix mat-icon-button aria-label="Clear">
+          <mat-icon>search</mat-icon>
+        </button>
+      </mat-form-field>
+
+      <div class="my-16" *ngFor="let item of consultant" (click)="select(item.name, item.profile, item.work)">
+        <div fxLayoutAlign="start center" class="left-container__card" [ngClass]="{'selected': item.name === selectedName}">
+          <div class="image">
+            <img [src]="item.profile" alt="profile" />
+          </div>
+          <div>
+            <p class="name">{{item.name}}</p>
+            <p class="title">{{item.work}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div fxFlex="0 0 68%" class="right-container">
+      <div class="width-full bg-white about-card">
+        <div fxLayoutAlign="space-between center">
+          <div fxLayoutAlign="start center">
+            <div class="image">
+              <img [src]="selectedProfile" alt="profile" />
+            </div>
+            <div>
+              <p style="font-size: 22px;" class="m-0 black-80">{{selectedName}}</p>
+              <p style="font-size: 14px;" class="m-0 black-60">{{selectedWork}}</p>
+              <div fxLayoutAlign="start">
+                <div style="width: 24px; margin-right: 14px; margin-top: 12px" *ngFor="let item of ['facebook','linkedin','twitter']">
+                  <img [src]="'./assets/images/'+item+'.svg'" alt="img" class="width-full">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div fxLayoutAlign="start center">
+            <div fxLayoutAlign="center center" class="custom-primary-button width-full" (click)="openDialog()">
+              <span>Book an Appointment</span>
+            </div>
+          </div>
+        </div>
+        <div style="margin: 24px 0 16px">
+          <h2 style="font-size: 16px;" class="black-80 m-0">About</h2>
+          <p style="font-size: 14px;" class="m-0 black-60">Currently serves as at Analyst the Strategic Planning Division under the InnoTech Department of DHI. He graduated with degree in computer Science and Innovation from Champlain College. Priorto</p>
+        </div>
+
+      </div>
+
+      <div style="margin-top: 24px" class="width-full bg-white work-container ">
+        <div style="box-shadow: inset 0px -1px 0px rgba(208, 209, 222, 0.64); padding: 12px 24px">
+          <h2 style="font-size: 16px; margin: 0" class="black-80 m-0">Work</h2>
+        </div>
+        <div style="padding: 12px 24px">
+          <ol style="margin: 16px 12px 0" class="target-activity">
+
+              <li style="padding-bottom: 24px" fxLayout="row" class="target-activity__item width--full pb-24">
+                <div style="padding-left: 32px" fxFlex="15" class="pl-32">
+                  <div style="width: 64px" class="target-activity__item-image ">
+<!--                    TODO: replace with logo-->
+                  <img src="./assets/images/dhi.png" class="width-full" alt="profile" />
+                </div>
+                </div>
+                <div fxFlex="70" style="margin-left: 28px; font-size: 12px" class="black-60">
+                  <p style="margin: 0; font-size: 14px">{{selectedWork}}</p>
+                  <p style="margin: 4px 0 0; ">Jul 2019 - Present - ( 1 yr 2 months )</p>
+                  <p style="margin: 0 0 6px; ">JThimphu, Bhutan</p>
+                  <p style="margin: 0; " >
+                    Conducting user research and testing. Developing wireframes and task flows based on user needs. Collaborating with Designers and Developers to create intuitive, user-friendly software.
+                  </p>
+                </div>
+              </li>
+              <li style="padding-bottom: 24px" fxLayout="row" class="target-activity__item width--full pb-24">
+                <div style="padding-left: 32px" fxFlex="15" class="pl-32">
+                  <div style="width: 64px" class="target-activity__item-image ">
+<!--                    TODO: replace with logo-->
+                  <img src="./assets/images/just.png" class="width-full" alt="profile" />
+                </div>
+                </div>
+                <div fxFlex="70" style="margin-left: 28px; font-size: 12px" class="black-60">
+                  <p style="margin: 0; font-size: 14px">Consultant</p>
+                  <p style="margin: 4px 0 0; ">Sep 2018 - Jun 2019 - ( 2 months )</p>
+                  <p style="margin: 0 0 6px; ">Redmond, Washington, United States  </p>
+                  <p style="margin: 0; ">
+                    Provided data analytics support for implementation of cloud systems, cyber security SOP and user accessibility                  </p>
+                </div>
+              </li>
+
+          </ol>
+        </div>
+      </div>
+
+      <div style="margin-top: 24px" class="width-full bg-white work-container ">
+        <div style="box-shadow: inset 0px -1px 0px rgba(208, 209, 222, 0.64); padding: 12px 24px">
+          <h2 style="font-size: 16px; margin: 0" class="black-80 m-0">Education</h2>
+        </div>
+        <div style="padding: 12px 24px">
+          <ol style="margin: 16px 12px 0" class="target-activity">
+
+            <li style="padding-bottom: 24px" fxLayout="row" class="target-activity__item width--full pb-24">
+                <div style="padding-left: 32px" fxFlex="15" class="pl-32">
+                  <div style="width: 64px" class="target-activity__item-image ">
+                    <!--                    TODO: replace with logo-->
+                    <img src="./assets/images/h.png" class="width-full" alt="profile" />
+                  </div>
+                </div>
+                <div fxFlex="70" style="margin-left: 28px; font-size: 12px" class="black-60">
+                  <p style="margin: 0; font-size: 14px">Master’s Degree, Studied Human Computer Interaction at Harvard University</p>
+                  <p style="margin: 4px 0 0; ">Jul 2015 -  Jul 2017 - ( 2 years )</p>
+                  <p style="margin: 0 0 6px; "> Redmond, Washington, United States </p>
+                  <p style="margin: 0; " >
+                    Conducting user research and testing. Developing wireframes and task flows based on user needs. Collaborating with Designers and Developers to create intuitive, user-friendly software.
+                  </p>
+                </div>
+              </li>
+
+              <li style="padding-bottom: 24px" fxLayout="row" class="target-activity__item width--full pb-24">
+                <div style="padding-left: 32px" fxFlex="15" class="pl-32">
+                  <div style="width: 64px" class="target-activity__item-image ">
+                    <!--                    TODO: replace with logo-->
+                    <img src="./assets/images/p.png" class="width-full" alt="profile" />
+                  </div>
+                </div>
+                <div fxFlex="70" style="margin-left: 28px; font-size: 12px" class="black-60">
+                  <p style="margin: 0; font-size: 14px">Degree, Studied BE Information Technology at Princeton University</p>
+                  <p style="margin: 4px 0 0; ">Jan 2012 - Jan 2015 - ( 4 years )</p>
+                  <p style="margin: 0 0 6px; "> Redmond, Washington, United States </p>
+                  <p style="margin: 0; " >
+                    Optimising applications (usually web based) to improve ease of use (usability), and create the best user experience by exploring many different approaches to solve end-users’ problems.                  </p>
+                </div>
+              </li>
+\
+          </ol>
+        </div>
+      </div>
+
+
+      <div style="margin-top: 24px" class="width-full bg-white work-container ">
+        <div style="box-shadow: inset 0px -1px 0px rgba(208, 209, 222, 0.64); padding: 12px 24px">
+          <h2 style="font-size: 16px; margin: 0" class="black-80 m-0">Skills</h2>
+        </div>
+          <div style="padding: 16px 24px; box-shadow: inset 0px -1px 0px rgba(208, 209, 222, 0.64);" class="black-60">
+            <p style="font-size: 14px">User accessibility</p>
+            <p style="font-size: 12px">
+              Accessibility is usability for people who interact with products differently. Your role is to help the team approach accessibility as a facet of user experience rather than checklist of requirements.
+            </p>
+          </div>
+
+          <div style="padding: 16px 24px; box-shadow: inset 0px -1px 0px rgba(208, 209, 222, 0.64);" class="black-60">
+            <p style="font-size: 14px">Cyber Security</p>
+            <p style="font-size: 12px">
+              Computer security, cybersecurity, or information technology security is the protection of computer systems and networks from information disclosure, theft of, or damage to their hardware, software, or electronic data, as well as from the disruption or misdirection of the services they provide.            </p>
+          </div>
+      </div>
+    </div>
+  </div>
+
+</div>

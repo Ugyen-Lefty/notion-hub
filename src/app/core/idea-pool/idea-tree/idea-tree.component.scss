@@ -1,0 +1,23 @@
+.chip-tag {
+    margin-top: 8px;
+    padding: 4px 12px;
+    border-radius: 5px;
+    color: black;
+    font-size: 12px;
+    background-color:rgba(0, 0, 0, 0.08);
+  }
+
+  .feed-detail {
+    width: 100%;
+    padding: 7px;
+    border-left: 2px solid #e4e7ec;
+  }
+  .feed-detail:hover {
+    background-color: rgba(0, 0, 0, 0.04);
+    border-left: 3px solid var(--primary);
+}
+
+.highlight {
+  background-color: rgba(0, 0, 0, 0.04);
+    border-left: 3px solid var(--primary);
+}

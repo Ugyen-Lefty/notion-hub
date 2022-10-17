@@ -1,0 +1,57 @@
+<div>
+  <p style="font-weight: 500;">Ask Question</p>
+  <hr width="100%">
+</div>
+<mat-dialog-content>
+<div fxLayout="column" fxLayoutGap="20px" [formGroup]="questionForm">
+
+ <div fxLayout="row" fxLayoutGap="5px">
+  <img [src]="'https://notion-hub.fly.dev'+ currentUser?.profile_url" height="34px" width="34px" style="border-radius: 50%">
+  <div fxLayout="column" fxLayoutAlign="center start">
+    <div style="font-size: 14px; font-weight: 400">{{ currentUser?.profile?.first_name }} {{ currentUser?.profile?.last_name }}</div>
+    <p style="font-size: 12px; color: rgba(0,0,0,0.6);">{{ currentUser?.profile?.role | titlecase }}</p>
+  </div>
+</div>
+ <div>
+  <mat-form-field style="width: 100%">
+    <input  matInput type="text" placeholder="Start your question with “What”,“How”,”Why”, etc..." class="title" formControlName="title">
+  </mat-form-field>
+ </div>
+ <div fxLayout="column" fxLayoutGap="10px">
+  <p style="font-weight: 400;">Detail description of the question</p>
+    <textarea rows="8" cols="20" placeholder="Description" class="text-area" formControlName="description"></textarea>
+</div>
+<div fxLayout="column" fxLayoutGap="10px">
+  <p style="font-weight: 400;">Please select tags for the above question</p>
+  <mat-chip-list selectable multiple>
+    <mat-chip #c="matChip" *ngFor="let option of categories_list" [value]="option" (click)="toggleSelection(c, option)" style="cursor: pointer; border-radius: 5px; font-weight: 200;">
+        {{option}}
+    </mat-chip>
+</mat-chip-list>
+</div>
+<div fxLayout="column" fxLayoutGap="4px">
+  <p style="font-weight: 400;">Multimedia attachments</p>
+   <div>
+    <mat-form-field>
+      <mat-chip-list>
+        <mat-chip style="border-radius: 5px; cursor: pointer;" fxLayout="row" fxLayoutAlign="start center">
+          <input #imageInput type="file" id="input-file-id" hidden (change)="processFile(imageInput)">
+          <mat-icon>image</mat-icon>
+          <label for="input-file-id">Image</label>
+        </mat-chip>
+        <mat-chip style="border-radius: 5px; cursor: pointer;"><mat-icon>videocam</mat-icon> Video</mat-chip>
+      </mat-chip-list>
+    </mat-form-field>
+    <div *ngIf="!!preview">
+      <img [src]="preview">
+    </div>
+   </div>
+</div>
+</div>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <div fxLayout="row" fxLayoutAlign="end" fxLayoutGap="5px" class="w-100">
+    <button mat-raised-button style="border: 1px solid var(--primary); color: var(--primary);" (click)="cancel()">Cancel</button>
+    <button mat-raised-button style="background-color: var(--primary); color: white;" (click)="askQuestion()">Post</button>
+  </div>
+</mat-dialog-actions>

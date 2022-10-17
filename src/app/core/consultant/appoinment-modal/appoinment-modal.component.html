@@ -1,0 +1,38 @@
+
+<h1 mat-dialog-title>Dialog with elements</h1>
+<div mat-dialog-content>
+  <div style="padding: 12px">
+    <mat-form-field class="width-full mb-20" appearance="outline">
+      <mat-label>Date</mat-label>
+      <input type="text" matInput>
+    </mat-form-field>
+    <mat-form-field class="width-full mb-20" appearance="outline">
+      <mat-label>Name</mat-label>
+      <input type="text" matInput>
+    </mat-form-field>
+    <mat-form-field class="width-full mb-20" appearance="outline">
+      <mat-label>Email</mat-label>
+      <input type="text" matInput>
+    </mat-form-field>
+    <mat-form-field class="width-full mb-20" appearance="outline">
+      <mat-label>Phone</mat-label>
+      <input type="text" matInput>
+    </mat-form-field>
+    <h2 style="margin: 4px 0 8px; font-size: 16px">Description</h2>
+    <mat-form-field class="width-full mb-20" appearance="outline">
+<!--      <mat-label>Address</mat-label>-->
+      <textarea matInput placeholder="Description"></textarea>
+    </mat-form-field>
+  </div>
+</div>
+<div mat-dialog-actions>
+  <div style="margin-bottom: 4px" fxLayoutAlign="end center" class="width-full">
+    <div style="margin-right: 12px" fxLayoutAlign="center center" class="custom-button" (click)="close()">
+      <span>Cancel</span>
+    </div>
+
+    <div fxLayoutAlign="center center" class="custom-primary-button" (click)="close()">
+      <span>Confirm</span>
+    </div>
+  </div>
+</div>

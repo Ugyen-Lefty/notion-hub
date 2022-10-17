@@ -1,0 +1,50 @@
+$my-primary: #2096F3;
+
+.hack-container {
+  height: 100vh;
+}
+
+
+.hack-sidenav {
+  width: 288px;
+  height: 100%;
+  color: rgba(0,0,0, 0.6);
+  background-color: var(--primary);
+}
+
+
+.hack-content {
+  position: relative;
+
+  &__content {
+    //box-shadow: 0 3px 4px 1px #cccccc;
+  }
+}
+
+.hack-header {
+  background-color: white;
+  height: 64px;
+  padding: 20px 32px;
+  box-shadow: 0 2px 4px #cccccc;
+  margin-bottom: 1px;
+  position: sticky;
+  top: 0;
+  z-index: 999;
+}
+
+.hack-nav-list {
+  background-color: #2c3344;
+  color: white;
+  border-radius: 6px;
+  margin: 4px 0;
+
+  &--hover:hover {
+    background-color: rgba(255, 255, 255, 0.12);
+    border-radius: 6px;
+  }
+}
+
+::ng-deep.mat-drawer-content {
+  background-color: #F1F5F9;
+  overflow-x: hidden;
+}

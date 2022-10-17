@@ -1,0 +1,67 @@
+<div fxLayout="row" fxLayoutAlign="space-between" style="margin: 20px;">
+  <div fxLayout="row" fxLayoutAlign="center center">
+    <img src="https://asmpa.selise.cloud/1665058546_2300f5e0641964b552fd3567fcf836_newlogo.png" alt="logo"
+      height="45px" class="mr-20 ml-24">
+      <div style="width: 400px">
+    <!-- <mat-form-field style="width: 100%" appearance="outline">
+      <input matInput type="text" placeholder="Search...">
+      <button matSuffix mat-icon-button>
+        <mat-icon>search</mat-icon>
+      </button>
+    </mat-form-field> -->
+    </div>
+  </div>
+  <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="40px" style="font-size: 11px;">
+    <!-- <div fxLayoutGap="20px">
+      <a href="#">Forum</a>
+      <a href="#">Feeds</a>
+      <a href="#">Proposals</a>
+      <a href="#">Notifications</a>
+      <a href="#">Messaging</a>
+    </div> -->
+    <div fxLayout="column" fxLayoutAlign="center center" routerLinkActive="active-link">
+      <mat-icon style="font-size: 20px;">question_answer</mat-icon>
+      <a routerLink="forum">Forum</a>
+    </div>
+    <div fxLayout="column" fxLayoutAlign="center center" routerLinkActive="active-link">
+      <mat-icon style="font-size: 20px;">list</mat-icon>
+      <a routerLink="idea-pool">Ideas Pool</a>
+    </div>
+    <div fxLayout="column" fxLayoutAlign="center center" routerLinkActive="active-link">
+      <mat-icon style="font-size: 20px;">file_copy</mat-icon>
+      <a routerLink="proposal">Proposal</a>
+    </div>
+    <div fxLayout="column" fxLayoutAlign="center center" routerLinkActive="active-link">
+      <mat-icon style="font-size: 20px;">notifications</mat-icon>
+      <a routerLink="notification">Notification</a>
+        </div>
+    <div fxLayout="column" fxLayoutAlign="center center" routerLinkActive="active-link">
+      <mat-icon style="font-size: 20px;">message</mat-icon>
+      <a routerLink="message">Message</a>
+       </div>
+       <div fxLayout="column" fxLayoutAlign="center center" routerLinkActive="active-link">
+        <mat-icon style="font-size: 20px;">people</mat-icon>
+        <a routerLink="consultant">Consultant</a>
+         </div>
+    <div fxLayout="row" [matMenuTriggerFor]="menu" style="cursor: pointer">
+      <img style="border-radius: 50%" [src]="'https://notion-hub.fly.dev/' + user?.profile_url"
+        class="ml-20" width="32px" height="32px" alt="Avatar" />
+      <div class="ml-12 mr-32">
+        <b class="mb-0">{{ user?.profile?.first_name }}</b>
+        <p class="mt-0 mb-0">{{ user?.profile?.role | titlecase}}</p>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="center center">
+        <mat-menu #menu="matMenu" fxLayout="column" style="margin: 10px;">
+          <button mat-menu-item (click)="toProfile()">
+            <mat-icon class="material-icons-outlined text-20">person</mat-icon>
+            <span>Profile</span>
+          </button>
+          <button mat-menu-item (click)="signOut()">
+            <mat-icon class="material-icons-outlined text-20">power_settings_new</mat-icon>
+            <span>Logout</span>
+          </button>
+        </mat-menu>
+      </div>
+      </div>
+  </div>
+</div>

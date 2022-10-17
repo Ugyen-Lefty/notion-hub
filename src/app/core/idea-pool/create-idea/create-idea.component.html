@@ -1,0 +1,52 @@
+<div>
+  <h1>Post Idea</h1>
+  <hr width="100%">
+</div><mat-dialog-content>
+<div fxLayout="column" fxLayoutGap="20px" [formGroup]="postIdea">
+
+ <div fxLayout="row" fxLayoutGap="5px">
+  <img [src]="'https://notion-hub.fly.dev'+ currentUser?.profile_url" height="34px" width="34px" style="border-radius: 50%">
+  <div fxLayout="column" fxLayoutAlign="center start">
+    <b>{{ currentUser?.profile?.first_name }} {{ currentUser?.profile?.last_name }}</b>
+    <p>{{ currentUser?.profile?.role | titlecase }}</p>
+  </div>
+</div>
+ <div>
+  <mat-form-field style="width: 100%">
+    <input matInput type="text" placeholder="Title of your idea" class="title" formControlName="title">
+  </mat-form-field>
+ </div>
+ <div fxLayout="column" fxLayoutGap="10px">
+  <p style="font-weight: 500;">Detail description of your idea</p>
+    <textarea rows="8" cols="20" placeholder="Description" class="text-area" formControlName="description"></textarea>
+</div>
+<div fxLayout="column" fxLayoutGap="10px">
+  <p style="font-weight: 500;">Please select tags for the above question</p>
+  <mat-chip-list selectable multiple>
+    <mat-chip #c="matChip" *ngFor="let option of categories_list" [value]="option" (click)="toggleSelection(c, option)" style="cursor: pointer; border-radius: 5px;">
+        {{option}}
+    </mat-chip>
+</mat-chip-list>
+</div>
+<div fxLayout="column" fxLayoutGap="4px">
+  <p style="font-weight: 500; padding-bottom: 10px;">Visibility</p>
+  <mat-radio-group aria-label="Select an option" fxLayout="column" fxLayoutGap="5px" formControlName="visibility">
+    <mat-radio-button value="common" fxLayout="column">
+      <p style="font-weight: 450;" class="mb-0 pl-8">Public</p>
+      <p style="color: gray;" class="pl-8">Your entire idea post will be seen by all the users in the platform</p>
+    </mat-radio-button>
+    <mat-radio-button value="personal" fxLayout="column">
+      <p style="font-weight: 450;" class="mb-0 pl-8">Consensual</p>
+      <p style="color: gray;" class="pl-8">Users will have to agree to the terms and conditions before reading the full idea post</p>
+    </mat-radio-button>
+  </mat-radio-group>
+</div>
+</div>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <div fxLayout="row" fxLayoutAlign="end" fxLayoutGap="5px" class="w-100">
+    <button mat-raised-button style="border: 1px solid var(--primary); color: var(--primary);">Cancel</button>
+    <button *ngIf="!isPulled" mat-raised-button style="background-color: var(--primary); color: white;" (click)="addPost()">Post</button>
+    <button *ngIf="isPulled" mat-raised-button style="background-color: var(--primary); color: white;" (click)="pullIdea()">Pull</button>
+  </div>
+</mat-dialog-actions>
